@@ -55,6 +55,7 @@ public interface MethodOrderer {
 			Method method2 = descriptor2.getTestMethod();
 
 			int result = method1.getName().compareTo(method2.getName());
+			// TODO Fallback to (name + formal argument list) instead of toString().
 			return (result != 0) ? result : method1.toString().compareTo(method2.toString());
 		};
 	}
