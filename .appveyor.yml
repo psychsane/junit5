@@ -14,6 +14,6 @@ install:
   - SET PATH=%JAVA_HOME%\bin;%PATH%
 
 test_script:
-  - gradlew --no-daemon -version
-  - gradlew --no-daemon --stacktrace build publishToMavenLocal
-  - gradlew --no-daemon --stacktrace -Dplatform.tooling.support.tests.enabled=true build
+  - gradlew --version
+  - gradlew --scan --stacktrace build publishToMavenLocal
+  - gradlew --scan --stacktrace -Dplatform.tooling.support.tests.enabled=true build

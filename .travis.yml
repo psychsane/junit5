@@ -34,7 +34,7 @@ matrix:
     - jdk: openjdk-ea
 
 script:
-  - ./gradlew --scan --warning-mode=all -Dplatform.tooling.support.tests.enabled=true build
+  - ./gradlew --daemon --scan --warning-mode=all -Dplatform.tooling.support.tests.enabled=true build
 
 stages:
   - test
@@ -45,7 +45,7 @@ jobs:
   include:
     - name: "Coverage"
       script:
-        - ./gradlew --scan --stacktrace --warning-mode=all -PenableJaCoCo build jacocoRootReport
+        - ./gradlew --daemon --scan --stacktrace --warning-mode=all -PenableJaCoCo build jacocoRootReport
         - bash <(curl -s https://codecov.io/bash)
     - stage: deploy
       name: "Publish snapshot artifacts"
@@ -54,7 +54,7 @@ jobs:
         - secure: KB6nXD6SU+g7jNB+JnmOy9aOx21tazy+j2SbFj6UTayfEWfD3E7nw8AxQLRy9XWVaUQZGk+F8UWvHMX/5qhfqS3eXsdqGY3BaDM6QB8O3kMIZjO2I1JxmLoEBXqzWPFo0qfdexm78FhU3LCqzwofl4eCkwCErjF0483MfUOe54Q=
         # ORG_GRADLE_PROJECT_ossrhPassword
         - secure: haIyH2wZSfmnH/oKJ0J1pMBl1wsYMhc26iOPunaMELKUgPCBC4+y5qYJBcG3/G9gy3qYYi3GdFLvHVkqxlAABTC5lcNyBqsU20SzKD6HNyf4rv7Dtv+x1GjI7Yz50zAaJyPnoQBdboMdevPTfczcCAf6mRvA5nmEZc1D1fbbGA8=
-      script: ./gradlew --scan publish -x check
+      script: ./gradlew --daemon --scan publish -x check
     - name: "Update snapshot documentation"
       addons:
         apt:
